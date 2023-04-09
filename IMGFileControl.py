@@ -14,7 +14,7 @@ class IMGFileControl:
     def _check_folder(self):
         while True:
             if self.ScanGUI.scanState == self.ScanGUI.STATE_SCANNING_SUB_PAGE \
-                    or self.ScanGUI.scanState == self.ScanGUI.STATE_SCANNING_DEV_PAGE:
+                    or self.ScanGUI.scanState == self.ScanGUI.STATE_SCANNING_ADV_PAGE:
 
                 files = os.listdir(self.ScanGUI.in_imgpath)
                 if len(files) >= 2:

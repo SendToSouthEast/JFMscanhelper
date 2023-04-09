@@ -208,5 +208,5 @@ if __name__ == "__main__":
 
     ScanGUI.scanInit()
     ScanGUI.show()
-    #picProc.picEdit("E:/Projects/33diaryscan/pythonScan/test/1_0_1.jpg")
+    #picProc.picEdit("E:/Projects/33diaryscan/pythonScan/test/1_1_1.jpg")
     app.exec_()
