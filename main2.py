@@ -108,6 +108,17 @@ class ScanGUI(QtWidgets.QWidget):
                 ori_book_no = self.book_no.value()
                 ori_adv_page = self.adv_page.value()
                 ori_sub_page = self.sub_page.value()
+
+                if scan_state == self.STATE_SCANNING_ADV_PAGE:
+                    self.adv_page.setValue(ori_adv_page + 1)
+                    self.sub_page.setValue(1)
+                elif scan_state == self.STATE_SCANNING_SUB_PAGE:
+                    self.sub_page.setValue(ori_sub_page + 1)
+
+                ori_book_no = self.book_no.value()
+                ori_adv_page = self.adv_page.value()
+                ori_sub_page = self.sub_page.value()
+
                 if scan_state == self.STATE_SCANNING_ADV_PAGE:
                     self.result_text.append(
                         "扫描高级页面：本数编号 {}，高级页码 {}，次级页码 {}"
@@ -154,13 +165,9 @@ class ScanGUI(QtWidgets.QWidget):
         ori_adv_page = self.adv_page.value()
         ori_sub_page = self.sub_page.value()
 
-        if self.scanState == self.STATE_SCANNING_ADV_PAGE:
-            self.adv_page.setValue(ori_adv_page + 1)
-            self.sub_page.setValue(1)
-        elif self.scanState == self.STATE_SCANNING_SUB_PAGE:
-            self.sub_page.setValue(ori_sub_page + 1)
 
-        target_filename = "{}_{}_{}.png".format(ori_book_no, ori_adv_page, ori_sub_page)
+
+        target_filename = "{}_{}_{}.jpg".format(ori_book_no, ori_adv_page, ori_sub_page)
         self.scanState = self.STATE_WAITING_FOR_USER_ACTION
         self.enableScanButton(True)
 
@@ -201,5 +208,5 @@ if __name__ == "__main__":
 
     ScanGUI.scanInit()
     ScanGUI.show()
-    #picProc.picEdit("E:/Projects/33diaryscan/test/1/1.png")
+    #picProc.picEdit("E:/Projects/33diaryscan/pythonScan/test/1_0_1.jpg")
     app.exec_()

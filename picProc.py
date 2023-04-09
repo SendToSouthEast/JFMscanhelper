@@ -9,10 +9,10 @@ import numpy as np
 class picProc:
     def __init__(self, ScanGUI):
         self.ScanGUI = ScanGUI
-        self.width = 800
-        self.height = 800
-        self.display_height = 800
-        self.display_width = 800
+        self.width = 750
+        self.height = 750
+        self.display_height = 750
+        self.display_width = 750
         self.radio = 1
         self.points = []
         self.img_path = ""
@@ -29,7 +29,14 @@ class picProc:
         self.display_height, self.display_width = int(h * self.radio), int(w * self.radio)
         # 缩放图像
         self.display_image = cv2.resize(self.display_image, (self.display_width, self.display_height))
-        pixmap = QPixmap.fromImage(QImage(self.display_image.data, self.display_width, self.display_height, QImage.Format_RGB888))
+
+        # save image to file
+        cv2.imwrite('temp.jpg', self.display_image)
+
+        # load image from file with QPixmap
+        pixmap = QPixmap('temp.jpg')
+
+        # display image in QLabel
         self.ScanGUI.image_label.setPixmap(pixmap)
         self.ScanGUI.image_label.setAlignment(Qt.AlignTop)
 
@@ -52,8 +59,10 @@ class picProc:
         if len(self.points) == 4:
             cv2.line(self.display_image, tuple(self.points[len(self.points) - 1]), tuple(self.points[0]), (0, 255, 0), 2)
 
+        cv2.imwrite('temp.jpg', self.display_image)
 
-        pixmap = QPixmap.fromImage(QImage(self.display_image.data, self.display_width, self.display_height, QImage.Format_RGB888))
+        # load image from file with QPixmap
+        pixmap = QPixmap('temp.jpg')
         self.ScanGUI.image_label.setPixmap(pixmap)
 
         if len(self.points) == 4:
@@ -136,8 +145,10 @@ class picProc:
 
         #缩放图像
         ed_display_image = cv2.resize(ed_display_image, (ed_display_width, ed_display_height))
-        pixmap = QPixmap.fromImage(
-            QImage(ed_display_image.data, ed_display_width, ed_display_height, QImage.Format_RGB888))
+        cv2.imwrite('temp.jpg', ed_display_image)
+
+        # load image from file with QPixmap
+        pixmap = QPixmap('temp.jpg')
         self.ScanGUI.image_label.setPixmap(pixmap)
         self.ScanGUI.image_label.setAlignment(Qt.AlignTop)
 
